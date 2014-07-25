@@ -2,6 +2,10 @@
 Thumbs.db
 ehthumbs.db
 
+# Compiled binaries folders
+bin
+obj
+
 # Folder config file
 Desktop.ini
 
@@ -34,3 +38,5 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+*.suo
