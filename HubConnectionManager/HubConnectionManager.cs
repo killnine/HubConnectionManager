@@ -53,58 +53,51 @@ namespace HubConnectionManager
 
         public async Task Initialize()
         {
-            try
+            _hubConnection.Received += s =>
             {
-                _hubConnection.Received += s =>
+                if (Received != null)
                 {
-                    if (Received != null)
-                    {
-                        Received(s);
-                    }
-                };
-                _hubConnection.Closed += () =>
+                    Received(s);
+                }
+            };
+            _hubConnection.Closed += () =>
+            {
+                if (Closed != null)
                 {
-                    if (Closed != null)
-                    {
-                        Closed();
-                    }
-                };
-                _hubConnection.Reconnecting += () =>
+                    Closed();
+                }
+            };
+            _hubConnection.Reconnecting += () =>
+            {
+                if (Reconnecting != null)
                 {
-                    if (Reconnecting != null)
-                    {
-                        Reconnecting();
-                    }
-                };
-                _hubConnection.Reconnected += () =>
+                    Reconnecting();
+                }
+            };
+            _hubConnection.Reconnected += () =>
+            {
+                if (Reconnected != null)
                 {
-                    if (Reconnected != null)
-                    {
-                        Reconnected();
-                    }
-                };
-                _hubConnection.ConnectionSlow += () =>
+                    Reconnected();
+                }
+            };
+            _hubConnection.ConnectionSlow += () =>
+            {
+                if (ConnectionSlow != null)
                 {
-                    if (ConnectionSlow != null)
-                    {
-                        ConnectionSlow();
-                    }
-                };
-                _hubConnection.Error += e =>
+                    ConnectionSlow();
+                }
+            };
+            _hubConnection.Error += e =>
+            {
+                if (Error != null)
                 {
-                    if (Error != null)
-                    {
-                        Error(e);
-                    }
-                };
-                _hubConnection.StateChanged += OnStateChanged;
+                    Error(e);
+                }
+            };
+            _hubConnection.StateChanged += OnStateChanged;
 
-                await _hubConnection.Start();
-            }
-            catch
-            {
-                /*Om nom nom*/
-            }
+            await _hubConnection.Start();
         }
 
         public IHubProxy CreateHubProxy(string hubName)
@@ -130,10 +123,6 @@ namespace HubConnectionManager
                     _retryTimer.Change(Timeout.Infinite, Timeout.Infinite);
                 }
             }
-            catch
-            {
-                /* Om nom nom */
-            }
             finally
             {
                 //Bubble event up to higher-level subscribers;
@@ -146,16 +135,9 @@ namespace HubConnectionManager
 
         private async Task RetryConnection()
         {
-            try
+            if (_hubConnection != null && _hubConnection.State == ConnectionState.Disconnected)
             {
-                if (_hubConnection != null && _hubConnection.State == ConnectionState.Disconnected)
-                {
-                    await _hubConnection.Start();
-                }
-            }
-            catch
-            {
-                /*Om nom nom*/
+                await _hubConnection.Start();
             }
         }
     }
