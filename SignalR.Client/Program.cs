@@ -2,6 +2,7 @@
 using System.Runtime.Remoting.Proxies;
 using System.Threading;
 using System.Threading.Tasks;
+using HubConnectionManager;
 using Microsoft.AspNet.SignalR.Client;
 
 namespace SignalR.Client
@@ -41,7 +42,8 @@ namespace SignalR.Client
             Console.WriteLine("Attmepting to connect to SignalR endpoint...");
             
             IHubProxy hubProxy = _manager.CreateHubProxy(CLIENT_HUB);
-            ((HubConnectionManager.HubConnectionManager)_manager).Initialize().ContinueWith(task =>
+            SetupNotifications(_manager);
+            _manager.Initialize().ContinueWith(task =>
             {
                 if (task.IsFaulted)
                 {
@@ -57,17 +59,24 @@ namespace SignalR.Client
             {
                 if (_manager.State == ConnectionState.Connected)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(hubProxy.Invoke<string>("Greetings", "Derek").Result);
-                    Console.ForegroundColor = ConsoleColor.White;
-
-                    Console.WriteLine("Press any key.");
-                    Console.ReadLine();
+                    try
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(hubProxy.Invoke<string>("Greetings", "User").Result);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    catch
+                    { }
                 }
 
                 //Chill
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
             }
+        }
+
+        private static void SetupNotifications(IHubConnectionManager manager)
+        {
+            manager.StateChanged += change => Console.WriteLine("State changed to:" + change.NewState);
         }
     }
 }

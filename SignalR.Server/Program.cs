@@ -31,9 +31,16 @@ namespace SignalR.Server
 
         private static void Main(string[] args)
         {
-            WebAppStart = WebApp.Start<Startup>(URL);
-            Console.WriteLine("Server running on {0}", URL);
-            Console.ReadKey(true);
+            try
+            {
+                WebAppStart = WebApp.Start<Startup>(URL);
+                Console.WriteLine("Server running on {0}", URL);
+                Console.ReadKey(true);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Unhandled exception occcurred! " + ex.Message);   
+            }
         }
     }
 }

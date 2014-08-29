@@ -7,8 +7,8 @@ namespace HubConnectionManager
 {
     public class HubConnectionManager : IHubConnectionManager
     {
-        private readonly Timer _retryTimer;
         private readonly HubConnection _hubConnection;
+        private int _retryPeriod = 10000;
 
         public event Action<Exception> Error;
         public event Action<string> Received;
@@ -17,8 +17,6 @@ namespace HubConnectionManager
         public event Action Reconnected;
         public event Action ConnectionSlow;
         public event Action<StateChange> StateChanged;
-
-        private int _retryPeriod = 10000;
         public int RetryPeriod
         {
             get { return _retryPeriod; }
@@ -33,7 +31,6 @@ namespace HubConnectionManager
                 _retryPeriod = value;
             }
         }
-
         public ConnectionState State
         {
             get { return _hubConnection.State; }
@@ -41,7 +38,6 @@ namespace HubConnectionManager
 
         private HubConnectionManager(string url)
         {
-            _retryTimer = new Timer(obj => _hubConnection.Start());
             _hubConnection = new HubConnection(url);
         }
 
@@ -103,6 +99,13 @@ namespace HubConnectionManager
                 if (Error != null)
                 {
                     Error(e);
+                }
+            };
+            _hubConnection.StateChanged += e =>
+            {
+                if (StateChanged != null)
+                {
+                    StateChanged(e);
                 }
             };
             
