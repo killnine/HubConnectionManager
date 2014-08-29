@@ -18,7 +18,7 @@ namespace HubConnectionManager
         public event Action ConnectionSlow;
         public event Action<StateChange> StateChanged;
 
-        private int _retryPeriod = 30000;
+        private int _retryPeriod = 10000;
         public int RetryPeriod
         {
             get { return _retryPeriod; }
@@ -41,7 +41,7 @@ namespace HubConnectionManager
 
         private HubConnectionManager(string url)
         {
-            _retryTimer = new Timer(async state => await RetryConnection(), null, Timeout.Infinite, RetryPeriod);
+            _retryTimer = new Timer(obj => _hubConnection.Start());
             _hubConnection = new HubConnection(url);
         }
 
@@ -60,11 +60,21 @@ namespace HubConnectionManager
                     Received(s);
                 }
             };
-            _hubConnection.Closed += () =>
+            _hubConnection.Closed += async () =>
             {
                 if (Closed != null)
                 {
                     Closed();
+                }
+
+                await TaskEx.Delay(RetryPeriod);
+                try
+                {
+                    await _hubConnection.Start();
+                }
+                catch (Exception ex)
+                {
+                    //NOTE: Unable to connect...again.
                 }
             };
             _hubConnection.Reconnecting += () =>
@@ -95,8 +105,7 @@ namespace HubConnectionManager
                     Error(e);
                 }
             };
-            _hubConnection.StateChanged += OnStateChanged;
-
+            
             await _hubConnection.Start();
         }
 
@@ -107,38 +116,10 @@ namespace HubConnectionManager
                 throw new ArgumentNullException("hubName");
             }
 
-            return _hubConnection.CreateHubProxy(hubName);
+            var proxy = _hubConnection.CreateHubProxy(hubName);
+            return proxy;
         }
 
-        private void OnStateChanged(StateChange stateChange)
-        {
-            try
-            {
-                if (stateChange.NewState == ConnectionState.Disconnected)
-                {
-                    _retryTimer.Change(RetryPeriod, RetryPeriod);
-                }
-                else
-                {
-                    _retryTimer.Change(Timeout.Infinite, Timeout.Infinite);
-                }
-            }
-            finally
-            {
-                //Bubble event up to higher-level subscribers;
-                if (StateChanged != null)
-                {
-                    StateChanged(stateChange);
-                }
-            }
-        }
 
-        private async Task RetryConnection()
-        {
-            if (_hubConnection != null && _hubConnection.State == ConnectionState.Disconnected)
-            {
-                await _hubConnection.Start();
-            }
-        }
     }
 }
