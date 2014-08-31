@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 
@@ -9,6 +8,7 @@ namespace HubConnectionManager
     {
         private readonly HubConnection _hubConnection;
         private int _retryPeriod = 10000;
+        private bool _userCalledDisconnect = false;
 
         public event Action<Exception> Error;
         public event Action<string> Received;
@@ -118,9 +118,8 @@ namespace HubConnectionManager
             {
                 throw new ArgumentNullException("hubName");
             }
-
-            var proxy = _hubConnection.CreateHubProxy(hubName);
-            return proxy;
+            
+            return _hubConnection.CreateHubProxy(hubName);
         }
 
 

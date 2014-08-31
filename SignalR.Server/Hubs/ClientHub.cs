@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 
-namespace SignalR.Server.Hubs
+namespace HubConnectionManager.SignalR.Server.Hubs
 {
     [HubName("ClientHub")]
     public class ClientHub : Hub

@@ -2,7 +2,7 @@
 using Microsoft.Owin.Cors;
 using Owin;
 
-namespace SignalR.Server
+namespace HubConnectionManager.SignalR.Server
 {
     public class Startup
     {
