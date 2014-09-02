@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HubConnectionManager", "HubConnectionManager\HubConnectionManager.csproj", "{687CDF73-8065-4AC8-96C6-4B872EC73E8F}"
 EndProject
@@ -12,21 +12,35 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Debug|x86.ActiveCfg = Debug|x86
+		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Debug|x86.Build.0 = Debug|x86
 		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Release|x86.ActiveCfg = Release|x86
+		{687CDF73-8065-4AC8-96C6-4B872EC73E8F}.Release|x86.Build.0 = Release|x86
 		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Debug|x86.ActiveCfg = Debug|x86
+		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Debug|x86.Build.0 = Debug|x86
 		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Release|x86.ActiveCfg = Release|x86
+		{FEB1A757-C083-4FBE-B052-80356EA1715F}.Release|x86.Build.0 = Release|x86
 		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Debug|x86.ActiveCfg = Debug|x86
+		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Debug|x86.Build.0 = Debug|x86
 		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Release|x86.ActiveCfg = Release|x86
+		{892037F6-E67B-49E0-9CAB-2D910FC3CAE0}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
