@@ -13,7 +13,7 @@ namespace HubConnectionManager.SignalR.Client
             string CLIENT_HUB = "ClientHub";
             string WORKING_URL = "http://localhost:6790";
             
-            _manager = HubConnectionManager.GetHubConnectionmanager(WORKING_URL);
+            _manager = HubConnectionManager.GetHubConnectionManager(WORKING_URL);
 
             Console.WriteLine("Attmepting to connect to SignalR endpoint...");
             
