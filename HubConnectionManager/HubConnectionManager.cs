@@ -36,14 +36,19 @@ namespace HubConnectionManager
             get { return _hubConnection.State; }
         }
 
-        private HubConnectionManager(string url)
+        private HubConnectionManager(HubConnection hubConnection)
         {
-            _hubConnection = new HubConnection(url);
+            _hubConnection = hubConnection;
         }
 
         public static IHubConnectionManager GetHubConnectionManager(string url)
         {
-            IHubConnectionManager connectionManager = new HubConnectionManager(url);
+            return GetHubConnectionManager(new HubConnection(url));
+        }
+
+        public static IHubConnectionManager GetHubConnectionManager(HubConnection hubConnection)
+        {
+            IHubConnectionManager connectionManager = new HubConnectionManager(hubConnection);
             return connectionManager;
         }
 
