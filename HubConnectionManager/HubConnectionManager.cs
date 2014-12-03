@@ -41,9 +41,20 @@ namespace HubConnectionManager
             _hubConnection = new HubConnection(url);
         }
 
+        private HubConnectionManager(HubConnection hubConnection)
+        {
+            _hubConnection = hubConnection;
+        }
+
         public static IHubConnectionManager GetHubConnectionManager(string url)
         {
             IHubConnectionManager connectionManager = new HubConnectionManager(url);
+            return connectionManager;
+        }
+
+        public static IHubConnectionManager GetHubConnectionManager(HubConnection hubConnection)
+        {
+            IHubConnectionManager connectionManager = new HubConnectionManager(hubConnection);
             return connectionManager;
         }
 
