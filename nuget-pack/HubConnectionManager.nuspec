@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>HubConnectionManager</id>
+    <version>$version$</version>
+    <title>SignalR HubConnection Manager</title>
+    <authors>Derek Heiser</authors>
+    <owners>Derek Heiser</owners>
+    <projectUrl>https://github.com/killnine/HubConnectionManager</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>SignalR extension to help retry connecting to server if initialization fails on startup. Also provides more convenient unit testing interface.</description>
+    <tags> SignalR real-time realtime http comet websockets</tags>
+    <language>en-US</language>
+    <copyright>Derek Heiser 2014</copyright>
+    <dependencies>
+      <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+      <dependency id="Microsoft.AspNet.SignalR.Client" version="2.1.0" />
+    </dependencies>
+  </metadata>
+</package>
