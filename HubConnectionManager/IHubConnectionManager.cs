@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNet.SignalR.Client.Transports;
 
 namespace HubConnectionManager
 {
@@ -8,6 +9,7 @@ namespace HubConnectionManager
     {
         int RetryPeriod { get; set; }
         ConnectionState State { get; }
+        IClientTransport ConnectionType { get; }
         event Action<Exception> Error;
         event Action<string> Received;
         event Action Closed;

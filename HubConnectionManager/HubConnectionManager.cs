@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
+using Microsoft.AspNet.SignalR.Client.Transports;
 
 namespace HubConnectionManager
 {
@@ -34,6 +35,11 @@ namespace HubConnectionManager
         public ConnectionState State
         {
             get { return _hubConnection.State; }
+        }
+
+        public IClientTransport ConnectionType
+        {
+            get { return _hubConnection.Transport; }
         }
 
         private HubConnectionManager(string url)

@@ -30,6 +30,7 @@ namespace HubConnectionManager.SignalR.Client
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(hubProxy.Invoke<string>("Greetings", "User").Result);
                         Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Connected via " + _manager.ConnectionType.Name);
                     }
                     catch
                     { }

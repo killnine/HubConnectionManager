@@ -43,3 +43,5 @@ Icon
 .Trashes
 
 *.suo
+*.nupkg
+*.nuspec
