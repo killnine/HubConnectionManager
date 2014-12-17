@@ -170,5 +170,10 @@ namespace HubConnectionManager
                 StateChanged(stateChange);
             }
         }
+
+        public void Dispose()
+        {
+            Stop();
+        }
     }
 }

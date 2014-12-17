@@ -5,7 +5,7 @@ using Microsoft.AspNet.SignalR.Client.Transports;
 
 namespace HubConnectionManager
 {
-    public interface IHubConnectionManager
+    public interface IHubConnectionManager : IDisposable
     {
         int RetryPeriod { get; set; }
         ConnectionState State { get; }
