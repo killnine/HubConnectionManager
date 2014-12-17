@@ -17,7 +17,8 @@ namespace HubConnectionManager
         event Action Reconnected;
         event Action ConnectionSlow;
         event Action<StateChange> StateChanged;
-        Task Initialize();
         IHubProxy CreateHubProxy(string hubName);
+        Task Initialize();
+        void Stop();
     }
 }
