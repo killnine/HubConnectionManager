@@ -9,7 +9,6 @@ namespace HubConnectionManager
     {
         private readonly HubConnection _hubConnection;
         private int _retryPeriod = 10000;
-        private bool _userCalledDisconnect = false;
 
         public event Action<Exception> Error;
         public event Action<string> Received;
@@ -18,6 +17,7 @@ namespace HubConnectionManager
         public event Action Reconnected;
         public event Action ConnectionSlow;
         public event Action<StateChange> StateChanged;
+
         public int RetryPeriod
         {
             get { return _retryPeriod; }
@@ -32,6 +32,7 @@ namespace HubConnectionManager
                 _retryPeriod = value;
             }
         }
+
         public ConnectionState State
         {
             get { return _hubConnection.State; }
@@ -138,7 +139,5 @@ namespace HubConnectionManager
             
             return _hubConnection.CreateHubProxy(hubName);
         }
-
-
     }
 }
