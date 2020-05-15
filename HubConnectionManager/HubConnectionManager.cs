@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Client;
+﻿using Microsoft.AspNet.SignalR.Client;
 using Microsoft.AspNet.SignalR.Client.Transports;
+using System;
+using System.Threading.Tasks;
 
 namespace HubConnectionManager
 {
@@ -55,13 +55,13 @@ namespace HubConnectionManager
 
         public static IHubConnectionManager GetHubConnectionManager(string url)
         {
-            IHubConnectionManager connectionManager = new HubConnectionManager(url);
+            var connectionManager = new HubConnectionManager(url);
             return connectionManager;
         }
 
         public static IHubConnectionManager GetHubConnectionManager(HubConnection hubConnection)
         {
-            IHubConnectionManager connectionManager = new HubConnectionManager(hubConnection);
+            var connectionManager = new HubConnectionManager(hubConnection);
             return connectionManager;
         }
 
@@ -103,24 +103,18 @@ namespace HubConnectionManager
 
         private void OnReceived(string data)
         {
-            if (Received != null)
-            {
-                Received(data);
-            }
+            Received?.Invoke(data);
         }
 
         private async void OnClosed()
         {
-            if (Closed != null)
-            {
-                Closed();
-            }
+            Closed?.Invoke();
             await RetryConnection();
         }
 
         private async Task RetryConnection()
         {
-            await TaskEx.Delay(RetryPeriod);
+            await Task.Delay(RetryPeriod);
             try
             {
                 await _hubConnection.Start();
@@ -133,42 +127,27 @@ namespace HubConnectionManager
 
         private void OnReconnecting()
         {
-            if (Reconnecting != null)
-            {
-                Reconnecting();
-            }
+            Reconnecting?.Invoke();
         }
 
         private void OnReconnected()
         {
-            if (Reconnected != null)
-            {
-                Reconnected();
-            }
+            Reconnected?.Invoke();
         }
 
         private void OnConnectionSlow()
         {
-            if (ConnectionSlow != null)
-            {
-                ConnectionSlow();
-            }
+            ConnectionSlow?.Invoke();
         }
 
         private void OnError(Exception error)
         {
-            if (Error != null)
-            {
-                Error(error);
-            }
+            Error?.Invoke(error);
         }
 
         private void OnStateChanged(StateChange stateChange)
         {
-            if (StateChanged != null)
-            {
-                StateChanged(stateChange);
-            }
+            StateChanged?.Invoke(stateChange);
         }
 
         public void Dispose()
